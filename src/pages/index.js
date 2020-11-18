@@ -1,21 +1,21 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import logoGif from '../images/unhandled-exception-club-logo-transparent.gif'
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+      <img src={logoGif} alt="unhandled exception club logo" />
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <a href="http://discord.gg/4GgCG5C">Join Discord</a>
+    <br/>
+    <a href="https://www.youtube.com/channel/UCuXhrIE_d-Soapk2WEuGXAg">Follow Unhandled Exception on Youtube</a>
+    <br/>
+    <a href="https://twitch.tv/theBeastOfTheMiddleEast">Follow TheBeastOfTheMiddleEast on Twitch</a>
+    <br/>
+    <a href="https://twitch.tv/LeeroyCankins">Follow LeeroyCankins on Twitch</a>
   </Layout>
 )
 
