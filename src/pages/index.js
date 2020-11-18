@@ -18,6 +18,14 @@ const IndexPage = () => (
     <a href="https://twitch.tv/LeeroyCankins">Follow LeeroyCankins on Twitch</a>
     <br/>
     <a href="https://github.com/nicework-company/unhandledexception.club">Website Source on GitHub</a>
+    <br/>
+    <a href="https://abespodcast.github.io">Listen to Abes Podcast</a>
+    <br/>
+    <a href="https://twitter.com/eralpkaraduman">🐦 @eralpkaraduman</a>
+    <br/>
+    <a href="http://twitter.com/can_sykrfkl">🐦 @can_sykrfkl</a>
+    <br/>
+    <a href="http://twitter.com/mertahmetgunes">🐦 @mertahmetgunes</a>
   </Layout>
 )
 
