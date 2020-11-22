@@ -1,0 +1,9 @@
+#links a {
+    color: black;
+    text-decoration: none;
+    display: table;
+}
+
+#links a:hover {
+    color: #ac3232;
+}
