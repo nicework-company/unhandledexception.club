@@ -2,19 +2,20 @@ import React from "react"
 
 import ytLogo from "../images/youtube_social_icon_red.png"
 import dcLogo from "../images/Discord-Logo-Color.png"
+import { TiledLinkContainer, TiledLink, TiledLinkIcon } from '../theme'
 
 const TopLinks = () => (
-  <div className="links">
-    <a href="https://www.youtube.com/channel/UCuXhrIE_d-Soapk2WEuGXAg/live" className="youtube-button">
-      <img src={ytLogo} alt="Unhandled Exception Club Youtube Live" />
+  <TiledLinkContainer>
+    <TiledLink href="https://www.youtube.com/channel/UCuXhrIE_d-Soapk2WEuGXAg/live">
+      <TiledLinkIcon src={ytLogo} alt="Unhandled Exception Club Youtube Live" />
       Watch Live On Youtube
-    </a>
+    </TiledLink>
 
-    <a href="http://discord.gg/4GgCG5C" className="discord-button">
-      <img src={dcLogo} alt="Unhandled Exception Club Discord" />
+    <TiledLink href="http://discord.gg/4GgCG5C">
+      <TiledLinkIcon src={dcLogo} alt="Unhandled Exception Club Discord" />
       Join Discord
-    </a>
-  </div>
+    </TiledLink>
+  </TiledLinkContainer>
 )
 
 export default TopLinks

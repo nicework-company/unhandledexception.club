@@ -6,17 +6,19 @@ import Twitch from "../components/Twitch"
 import Podcast from "../components/Podcast"
 import Social from "../components/Social"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home"/>
+const IndexPage = () => {
+  return (
+    <Layout>
+      <SEO title="Home" />
 
-    <div className="content">
-      <TopLinks/>
-      <Twitch/>
-      <Podcast/>
-      <Social/>
-    </div>
-  </Layout>
-)
+      <div className="content">
+        <TopLinks />
+        <Twitch />
+        <Podcast />
+        <Social />
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
