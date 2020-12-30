@@ -7,7 +7,7 @@ const TwitchEmbed = props => {
     new window.Twitch.Embed(`${channelName}-twitch-embed`, {
       channel: channelName,
       width: "100%",
-      height: "600px"
+      height: "550px"
     })
   });
 

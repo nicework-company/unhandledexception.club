@@ -1,10 +1,10 @@
 import React from "react"
 
 import ytLogo from "../images/youtube_social_icon_red.png"
-import dcLogo from "../images/Discord-Logo-White.png"
+import dcLogo from "../images/Discord-Logo-Color.png"
 
 const TopLinks = () => (
-  <div className="top-links">
+  <div className="links">
     <a href="https://www.youtube.com/channel/UCuXhrIE_d-Soapk2WEuGXAg/live" className="youtube-button">
       <img src={ytLogo} alt="Unhandled Exception Club Youtube Live" />
       Watch Live On Youtube

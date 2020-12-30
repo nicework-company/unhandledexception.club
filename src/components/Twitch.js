@@ -6,7 +6,7 @@ const Twitch = () =>  {
   const [ libLoaded, setLibLoaded ] = useState(false);
 
   return (
-    <>
+    <div className="twitch">
       <h2>Twitch</h2>
       <div className="twitch-container">
         { 
@@ -18,7 +18,7 @@ const Twitch = () =>  {
             </>
         }
       </div>
-    </>
+    </div>
   )
 }
 

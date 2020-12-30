@@ -41,6 +41,8 @@ const Layout = ({ children }) => {
           marginTop: `2rem`
         }}>
           © {new Date().getFullYear()}, {data.site.siteMetadata?.title || `Title`}
+          &nbsp;
+          <a className="source" href="https://github.com/nicework-company/unhandledexception.club">Website Source on GitHub</a>
         </footer>
       </div>
     </div>
