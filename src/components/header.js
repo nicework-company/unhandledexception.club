@@ -6,7 +6,7 @@ import logoGif from '../images/unhandled-exception-club-logo-transparent.gif'
 const Header = ({ siteTitle }) => (
   <header>
     <Link to="/" className="header-link">
-      <img src={logoGif} alt="unhandled exception club logo"/>
+      <img src={logoGif} alt="unhandled exception club logo" />
       <div>
         {siteTitle}
       </div>
