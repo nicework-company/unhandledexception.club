@@ -45,7 +45,7 @@ export const PodcastContainer = styled.div`
   justify-content: space-between;
 `
 
-export const PodcastCard = styled.div`
+export const PodcastCard = styled.a`
   display: flex;
   border: 1px solid #d8d8d8;
   justify-content: flex-start;
