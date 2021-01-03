@@ -11,7 +11,7 @@ const Podcast = () => (
         <div>Kulak Podcast</div>
       </a>
 
-      <a href="https://abespodcast.github.io/" className="podcast-card" style={{ backgroundImage: `url(${abes})` }}>
+      <a href="https://abespodcast.com/" className="podcast-card" style={{ backgroundImage: `url(${abes})` }}>
         <div>Abes Podcast</div>
       </a>
     </div>
