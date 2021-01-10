@@ -2,11 +2,13 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from 'styled-components'
 
-const mediumSize = "770px"
-const smallSize = "450px"
+import "./fonts/Inter/inter.css"
+
+const mediumSize = "770px";
+const smallSize = "450px";
 
 export const LayoutContainer = styled.div`
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter var', sans-serif;
   padding: 50px 20px;
   max-width: 950px;
   margin: auto;
