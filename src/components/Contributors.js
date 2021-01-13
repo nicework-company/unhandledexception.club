@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import {
   TiledLink,
   TiledLinkContainer,
@@ -7,27 +8,30 @@ import {
 } from "../theme"
 
 const Contributors = () => {
-  const [contributors, setContributors] = useState(null)
-
-  useEffect(() => {
-    fetch(
-      "https://api.github.com/repos/nicework-company/unhandledexception.club/contributors"
-    )
-      .then(x => x.json())
-      .then(val => setContributors(val))
-  }, [])
-
+  const contributorsData = useStaticQuery(graphql`
+    query {
+      allContributors {
+        nodes {
+          data {
+            id
+            avatar_url
+            html_url
+            login
+          }
+        }
+      }
+    }
+  `)
   return (
     <>
       <SectionTitle>Contributors</SectionTitle>
       <TiledLinkContainer>
-        {contributors &&
-          contributors.map(item => (
-            <TiledLink href={item.html_url} key={item.id}>
-              <TiledLinkIcon src={item.avatar_url} alt={item.login} />@
-              {item.login}
-            </TiledLink>
-          ))}
+        {contributorsData.allContributors.nodes[0].data.map(item => (
+          <TiledLink href={item.html_url} key={item.id} target="_blank">
+            <TiledLinkIcon src={item.avatar_url} alt={item.login} />@
+            {item.login}
+          </TiledLink>
+        ))}
       </TiledLinkContainer>
     </>
   )
