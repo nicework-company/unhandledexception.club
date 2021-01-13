@@ -7,11 +7,11 @@ const Podcast = () => (
   <>
     <SectionTitle>Podcasts</SectionTitle>
     <PodcastContainer>
-      <PodcastCard href="https://www.kulak.show/" className="podcast-card" style={{ backgroundImage: `url(${kulak})` }}>
+      <PodcastCard href="https://www.kulak.show/" style={{ backgroundImage: `url(${kulak})` }}>
         <PodcastCardTiltle>Kulak Podcast</PodcastCardTiltle>
       </PodcastCard>
 
-      <PodcastCard href="https://www.abespodcast.com/" className="podcast-card" style={{ backgroundImage: `url(${abes})` }}>
+      <PodcastCard href="https://www.abespodcast.com/" style={{ backgroundImage: `url(${abes})` }}>
         <PodcastCardTiltle>Abes Podcast</PodcastCardTiltle>
       </PodcastCard>
     </PodcastContainer>
