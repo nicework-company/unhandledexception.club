@@ -2,13 +2,11 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from 'styled-components'
 
-import "./fonts/Inter/inter.css"
-
-const mediumSize = "770px";
-const smallSize = "450px";
+const mediumSize = "770px"
+const smallSize = "450px"
 
 export const LayoutContainer = styled.div`
-  font-family: 'Inter var', sans-serif;
+  font-family: 'Inter', sans-serif;
   padding: 50px 20px;
   max-width: 950px;
   margin: auto;
@@ -116,7 +114,7 @@ export const TiledLinkContainer = styled.div`
 export const SectionTitle = styled.h3`
   margin: 0.4em 0 0 0;
   padding: 0;
-  font-family: 'Inter var', sans-serif;
+  font-family: 'Inter', sans-serif;
 `
 
 export const PodcastContainer = styled.div`
