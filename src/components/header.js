@@ -5,7 +5,7 @@ import logoGif from '../images/unhandled-exception-club-logo-transparent.gif'
 
 const Header = ({ siteTitle }) => (
   <HeaderContainer>
-    <HeaderLink to="/" className="header-link">
+    <HeaderLink to="/">
       <HeaderLinkImage src={logoGif} alt="unhandled exception club logo" />
       <HeaderLinkTitle>{siteTitle}</HeaderLinkTitle>
     </HeaderLink>
