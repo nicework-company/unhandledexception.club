@@ -11,12 +11,10 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
 
-      <div className="content">
         <TopLinks />
         <Twitch />
         <Podcast />
         <Social />
-      </div>
     </Layout>
   )
 }

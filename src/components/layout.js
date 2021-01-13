@@ -11,7 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.scss"
-import "../styles/global.scss"
+import { LayoutContainer, LayoutBody } from "../theme"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -25,15 +25,9 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="layout">
+    <LayoutContainer>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
+      <LayoutBody>
         <main>
           {children}
         </main>
@@ -42,10 +36,10 @@ const Layout = ({ children }) => {
         }}>
           © {new Date().getFullYear()}, {data.site.siteMetadata?.title || `Title`}
           &nbsp;
-          <a className="source" href="https://github.com/nicework-company/unhandledexception.club">Website Source on GitHub</a>
+          <a href="https://github.com/nicework-company/unhandledexception.club">Website Source on GitHub</a>
         </footer>
-      </div>
-    </div>
+      </LayoutBody>
+    </LayoutContainer>
   )
 }
 
