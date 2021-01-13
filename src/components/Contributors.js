@@ -23,7 +23,7 @@ const Contributors = () => {
       <TiledLinkContainer>
         {contributors &&
           contributors.map(item => (
-            <TiledLink href={item.html_url}>
+            <TiledLink href={item.html_url} key={item.id}>
               <TiledLinkIcon src={item.avatar_url} alt={item.login} />@
               {item.login}
             </TiledLink>
