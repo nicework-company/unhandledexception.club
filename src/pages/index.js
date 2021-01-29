@@ -10,7 +10,6 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-
         <TopLinks />
         <Twitch />
         <Podcast />
