@@ -21,7 +21,7 @@ const ThemeToggleButton = () => {
             checked={theme === 'dark'}
           />
           <TogglerSunImage src={SunImage} className={theme} alt="Light" />
-          <TogglerMoonImage src={MoonImage} className={theme} alt="Light" />
+          <TogglerMoonImage src={MoonImage} className={theme} alt="Dark" />
           <TogglerSlider className={theme}/>
         </TogglerLabel>
       )}
