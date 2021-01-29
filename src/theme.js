@@ -5,7 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 const mediumSize = "770px"
 const smallSize = "450px"
 
-export const GlobalStyle = createGlobalStyle`
+const lightScheme = `
   body {
     --bg: #ffffff;
     --red: #ac3232;
@@ -18,7 +18,9 @@ export const GlobalStyle = createGlobalStyle`
     --soft-grey: #f5f5f5;
     background-color: var(--bg);
   }
+`
 
+const darkScheme = `
   body.dark {
     --bg: #181a1b;
     --red: #d15f5f;
@@ -30,6 +32,20 @@ export const GlobalStyle = createGlobalStyle`
     --grey: #383c3f;
     --soft-grey: #1e2021;
     background-color: var(--bg);
+  }
+`
+
+export const GlobalStyle = createGlobalStyle`
+  ${lightScheme}
+
+  ${darkScheme}
+
+  @media (prefers-color-scheme: light) {
+    ${lightScheme}
+  }
+
+  @media (prefers-color-scheme: dark) {
+    ${darkScheme}
   }
 `
 
