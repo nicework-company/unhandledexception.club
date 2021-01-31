@@ -8,14 +8,22 @@ const smallSize = "450px"
 const lightScheme = `
   body {
     --bg: #ffffff;
-    --red: #ac3232;
-    --blue: #5656ff;
-    --sky-blue: #a8dbff;
-    --white: #ffffff;
-    --black: #000000;
-    --dark: #222222;
-    --grey: #e4e4e4;
-    --soft-grey: #f5f5f5;
+    --header-link-title-color: #ac3232;
+    --header-link-title-hover-color: #222222;
+    --header-link-border-color: #ac3232;
+    --tiled-link-color: #222222;
+    --tiled-link-bg-color: #f5f5f5;
+    --tiled-link-border-color: #e4e4e4;
+    --tiled-link-bg-hover-color: #e4e4e4;
+    --section-title-color: #222222;
+    --podcast-card-border-color: #e4e4e4;
+    --podcast-card-title-color: #ffffff;
+    --podcast-card-title-bg-color: #000000;
+    --toggler-label-border-color: #ac3232;
+    --toggler-label-bg-color: #a8dbff;
+    --toggler-slider-bg-color: #ac3232;
+    --footer-color: #222222;
+    --footer-link-color: #5656ff;
     background-color: var(--bg);
   }
 `
@@ -23,30 +31,27 @@ const lightScheme = `
 const darkScheme = `
   body.dark {
     --bg: #181a1b;
-    --red: #d15f5f;
-    --blue: #5656ff;
-    --sky-blue: #a8dbff;
-    --white: #e8e6e3;
-    --black: #000000;
-    --dark: #c7c7c7;
-    --grey: #383c3f;
-    --soft-grey: #1e2021;
+    --header-link-title-color: #d15f5f;
+    --header-link-title-hover-color: #c7c7c7;
+    --header-link-border-color: #d15f5f;
+    --tiled-link-color: #c7c7c7;
+    --tiled-link-bg-color: #1e2021;
+    --tiled-link-border-color: #383c3f;
+    --tiled-link-bg-hover-color: #383c3f;
+    --section-title-color: #c7c7c7;
+    --podcast-card-border-color: #383c3f;
+    --podcast-card-title-color: #e8e6e3;
+    --podcast-card-title-bg-color: #000000;
+    --toggler-label-border-color: #d15f5f;
+    --toggler-label-bg-color: #383c3f;
+    --toggler-slider-bg-color: #d15f5f;
+    --footer-color: #c7c7c7;
+    --footer-link-color: #5656ff;
     background-color: var(--bg);
   }
 `
-
 export const GlobalStyle = createGlobalStyle`
-  ${lightScheme}
-
-  ${darkScheme}
-
-  @media (prefers-color-scheme: light) {
-    ${lightScheme}
-  }
-
-  @media (prefers-color-scheme: dark) {
-    ${darkScheme}
-  }
+  ${props => props.theme === 'light' ? lightScheme : darkScheme}
 `
 
 export const LayoutContainer = styled.div`
@@ -79,7 +84,7 @@ export const HeaderLinkImage = styled.img`
 `
 
 export const HeaderLinkTitle = styled.div`
-  color: var(--red);
+  color: var(--header-link-title-color);
   padding-left: 30px;
   font-size: 56px;
   line-height: 54px;
@@ -104,31 +109,31 @@ export const HeaderLink = styled(props => <Link {...props}/>)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  border: 6px solid var(--red);
+  border: 6px solid var(--header-link-border-color);
   border-radius: 20px;
 
   &:hover {
     ${HeaderLinkTitle} {
-      color: var(--dark);
+      color: var(--header-link-title-hover-color);
     }
   }
 `
 
 export const TiledLink = styled.a`
   display: flex;
-  background-color: var(--soft-grey);
+  background-color: var(--tiled-link-bg-color);
   width: 49%;
   align-items: center;
-  color: var(--dark);
+  color: var(--tiled-link-color);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
-  border: 1px solid var(--grey);
+  border: 1px solid var(--tiled-link-border-color);
 
   &:hover {
-    background-color: var(--grey);
+    background-color: var(--tiled-link-border-color);
   }
 
   @media (max-width: ${mediumSize}) {
@@ -156,7 +161,7 @@ export const TiledLinkContainer = styled.div`
 `
 
 export const SectionTitle = styled.h3`
-  color: var(--dark);
+  color: var(--section-title-color);
   margin: 0.4em 0 0 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
@@ -175,7 +180,7 @@ export const PodcastContainer = styled.div`
 
 export const PodcastCard = styled.a`
   display: flex;
-  border: 1px solid var(--grey);
+  border: 1px solid var(--podcast-card-border-color);
   justify-content: flex-start;
   align-items: flex-end;
   width: 49%;
@@ -197,8 +202,8 @@ export const PodcastCard = styled.a`
 `
 
 export const PodcastCardTitle = styled.div`
-  color: var(--white);
-  background-color: var(--black);
+  color: var(--podcast-card-title-color);
+  background-color: var(--podcast-card-title-bg-color);
   margin: 10px;
   font-size: 22px;
   padding: 2px 5px;
@@ -212,20 +217,13 @@ export const TogglerLabel = styled.label`
   right: 10px;
   width: 60px;
   height: 30px;
-  border: 3px solid var(--red);
+  border: 3px solid var(--toggler-label-border-color);
   border-radius: 30px;
   overflow: hidden;
   display: flex;
   align-items: center;
   cursor: pointer;
-
-  &.light {
-    background-color: var(--sky-blue);
-  }
-
-  &.dark {
-    background-color: var(--grey);
-  }
+  background-color: var(--toggler-label-bg-color);
 `
 
 export const TogglerInput = styled.input`
@@ -236,7 +234,7 @@ export const TogglerSlider = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  background-color: var(--red);
+  background-color: var(--toggler-slider-bg-color);
   position: relative;
   transition: all ease-in-out .35s;
   top: 0px;
@@ -286,9 +284,9 @@ export const TogglerMoonImage = styled.img`
 
 export const Footer = styled.div`
   margin-top: 2em;
-  color: var(--dark);
+  color: var(--footer-color);
 `
 
 export const FooterLink = styled.a`
-  color: var(--blue);
+  color: var(--footer-link-color);
 `

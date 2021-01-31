@@ -11,7 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.scss"
-import { GlobalStyle, LayoutContainer, LayoutBody, Footer, FooterLink } from "../theme"
+import { LayoutContainer, LayoutBody, Footer, FooterLink } from "../theme"
 import ThemeToggleButton from "../components/ThemeToggleButton"
 
 const Layout = ({ children }) => {
@@ -27,7 +27,6 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <GlobalStyle />
       <ThemeToggleButton />
       <LayoutContainer>
         <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
