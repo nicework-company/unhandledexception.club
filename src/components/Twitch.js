@@ -17,7 +17,7 @@ const Twitch = () => {
             </TiledLink>
           <TiledLink href="https://www.twitch.tv/eren_ozel">
             <TiledLinkIcon src={TwitchIcon} alt="Eren_Ozel On Twitch" />
-              Eren_Ozel On Twitch On Twitch
+              Eren_Ozel On Twitch
             </TiledLink>
         </TiledLinkContainer>
     </>
