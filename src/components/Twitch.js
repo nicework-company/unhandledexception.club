@@ -7,6 +7,10 @@ const Twitch = () => {
     <>
       <SectionTitle>Twitch</SectionTitle>
         <TiledLinkContainer>
+          <TiledLink href="https://www.twitch.tv/ErikThePlum">
+            <TiledLinkIcon src={TwitchIcon} alt="ErikThePlum On Twitch" />
+            ErikThePlum On Twitch
+          </TiledLink>
           <TiledLink href="https://www.twitch.tv/theBeastOfTheMiddleEast">
             <TiledLinkIcon src={TwitchIcon} alt="TheBeastOfTheMiddleEast On Twitch" />
               TheBeastOfTheMiddleEast On Twitch
