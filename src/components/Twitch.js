@@ -10,15 +10,15 @@ const Twitch = () => {
           <TiledLink href="https://www.twitch.tv/theBeastOfTheMiddleEast">
             <TiledLinkIcon src={TwitchIcon} alt="TheBeastOfTheMiddleEast On Twitch" />
               TheBeastOfTheMiddleEast On Twitch
-            </TiledLink>
+          </TiledLink>
           <TiledLink href="https://www.twitch.tv/LeeroyCankins">
             <TiledLinkIcon src={TwitchIcon} alt="LeeroyCankins On Twitch" />
               LeeroyCankins On Twitch
-            </TiledLink>
+          </TiledLink>
           <TiledLink href="https://www.twitch.tv/eren_ozel">
             <TiledLinkIcon src={TwitchIcon} alt="Eren_Ozel On Twitch" />
               Eren_Ozel On Twitch
-            </TiledLink>
+          </TiledLink>
         </TiledLinkContainer>
     </>
   )

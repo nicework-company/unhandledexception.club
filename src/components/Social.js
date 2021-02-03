@@ -15,22 +15,22 @@ const Social = () => (
 
       <TiledLink href="https://twitter.com/eralpkaraduman">
         <TiledLinkIcon src={TwitterIcon} alt="Eralp Karaduman Twitter" />
-        {'@eralpkaraduman'} 
+        {'@eralpkaraduman'}
       </TiledLink>
 
       <TiledLink href="http://twitter.com/can_sykrfkl">
         <TiledLinkIcon src={TwitterIcon} alt="Can Soykarafakili Twitter" />
-        {'@can_sykrfkl'} 
+        {'@can_sykrfkl'}
       </TiledLink>
 
       <TiledLink href="http://twitter.com/mertahmetgunes">
         <TiledLinkIcon src={TwitterIcon} alt="Mert Ahmet Gunes Twitter" />
-        {'@mertahmetgunes'} 
+        {'@mertahmetgunes'}
       </TiledLink>
 
       <TiledLink href="http://twitter.com/eren_ozel">
         <TiledLinkIcon src={TwitterIcon} alt="Eren Ozel Twitter" />
-        {'@eren_ozel'} 
+        {'@eren_ozel'}
       </TiledLink>
     </TiledLinkContainer>
   </>

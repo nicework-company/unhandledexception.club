@@ -1,9 +1,58 @@
 import { Link } from "gatsby"
 import React from "react"
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 const mediumSize = "770px"
 const smallSize = "450px"
+
+const lightScheme = `
+  body {
+    --bg: #ffffff;
+    --header-link-title-color: #ac3232;
+    --header-link-title-hover-color: #222222;
+    --header-link-border-color: #ac3232;
+    --tiled-link-color: #222222;
+    --tiled-link-bg-color: #f5f5f5;
+    --tiled-link-border-color: #e4e4e4;
+    --tiled-link-bg-hover-color: #e4e4e4;
+    --section-title-color: #222222;
+    --podcast-card-border-color: #e4e4e4;
+    --podcast-card-title-color: #ffffff;
+    --podcast-card-title-bg-color: #000000;
+    --toggler-label-border-color: #ac3232;
+    --toggler-label-bg-color: #a8dbff;
+    --toggler-slider-bg-color: #ac3232;
+    --footer-color: #222222;
+    --footer-link-color: #5656ff;
+    background-color: var(--bg);
+  }
+`
+
+const darkScheme = `
+  body.dark {
+    --bg: #181a1b;
+    --header-link-title-color: #d15f5f;
+    --header-link-title-hover-color: #c7c7c7;
+    --header-link-border-color: #d15f5f;
+    --tiled-link-color: #c7c7c7;
+    --tiled-link-bg-color: #1e2021;
+    --tiled-link-border-color: #383c3f;
+    --tiled-link-bg-hover-color: #383c3f;
+    --section-title-color: #c7c7c7;
+    --podcast-card-border-color: #383c3f;
+    --podcast-card-title-color: #e8e6e3;
+    --podcast-card-title-bg-color: #000000;
+    --toggler-label-border-color: #d15f5f;
+    --toggler-label-bg-color: #383c3f;
+    --toggler-slider-bg-color: #d15f5f;
+    --footer-color: #c7c7c7;
+    --footer-link-color: #5656ff;
+    background-color: var(--bg);
+  }
+`
+export const GlobalStyle = createGlobalStyle`
+  ${props => props.theme === 'light' ? lightScheme : darkScheme}
+`
 
 export const LayoutContainer = styled.div`
   font-family: 'Inter', sans-serif;
@@ -35,7 +84,7 @@ export const HeaderLinkImage = styled.img`
 `
 
 export const HeaderLinkTitle = styled.div`
-  color: #ac3232;
+  color: var(--header-link-title-color);
   padding-left: 30px;
   font-size: 56px;
   line-height: 54px;
@@ -60,31 +109,31 @@ export const HeaderLink = styled(props => <Link {...props}/>)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  border: 6px solid #ac3232;
+  border: 6px solid var(--header-link-border-color);
   border-radius: 20px;
 
   &:hover {
     ${HeaderLinkTitle} {
-      color: #222;
+      color: var(--header-link-title-hover-color);
     }
   }
 `
 
 export const TiledLink = styled.a`
   display: flex;
-  background-color: #f5f5f5;
+  background-color: var(--tiled-link-bg-color);
   width: 49%;
   align-items: center;
-  color: #222;
+  color: var(--tiled-link-color);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--tiled-link-border-color);
 
   &:hover {
-    background-color: #e4e4e4;
+    background-color: var(--tiled-link-border-color);
   }
 
   @media (max-width: ${mediumSize}) {
@@ -112,6 +161,7 @@ export const TiledLinkContainer = styled.div`
 `
 
 export const SectionTitle = styled.h3`
+  color: var(--section-title-color);
   margin: 0.4em 0 0 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
@@ -130,7 +180,7 @@ export const PodcastContainer = styled.div`
 
 export const PodcastCard = styled.a`
   display: flex;
-  border: 1px solid #d8d8d8;
+  border: 1px solid var(--podcast-card-border-color);
   justify-content: flex-start;
   align-items: flex-end;
   width: 49%;
@@ -151,12 +201,92 @@ export const PodcastCard = styled.a`
   }
 `
 
-export const PodcastCardTiltle = styled.div`
-  color: #ffffff;
-  background-color: #000000;
+export const PodcastCardTitle = styled.div`
+  color: var(--podcast-card-title-color);
+  background-color: var(--podcast-card-title-bg-color);
   margin: 10px;
   font-size: 22px;
   padding: 2px 5px;
   border-radius: 3px;
   font-weight: bold;
+`
+
+export const TogglerLabel = styled.label`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 60px;
+  height: 30px;
+  border: 3px solid var(--toggler-label-border-color);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: var(--toggler-label-bg-color);
+`
+
+export const TogglerInput = styled.input`
+  display: none;
+`
+
+export const TogglerSlider = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: var(--toggler-slider-bg-color);
+  position: relative;
+  transition: all ease-in-out .35s;
+  top: 0px;
+
+  &.light {
+    left: 3px;
+  }
+
+  &.dark {
+    left: calc(100% - 23px);
+  }
+`
+
+export const TogglerSunImage = styled.img`
+  position: absolute;
+  transition: all ease-in-out 0.5s;
+  width: 30px;
+  filter: drop-shadow(0px 0px 5px rgb(252, 167, 38));
+
+  &.light {
+    top: -5px;
+    right: -8px;
+  }
+
+  &.dark {
+    top: -5px;
+    right: -45px;
+  }
+`
+
+export const TogglerMoonImage = styled.img`
+  position: absolute;
+  transition: all ease-in-out 0.5s;
+  width: 30px;
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+
+  &.light {
+    top: -5px;
+    left: -45px;
+  }
+
+  &.dark {
+    top: -5px;
+    left: -8px;
+  }
+`
+
+export const Footer = styled.div`
+  margin-top: 2em;
+  color: var(--footer-color);
+`
+
+export const FooterLink = styled.a`
+  color: var(--footer-link-color);
 `

@@ -11,7 +11,8 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.scss"
-import { LayoutContainer, LayoutBody } from "../theme"
+import { LayoutContainer, LayoutBody, Footer, FooterLink } from "../theme"
+import ThemeToggleButton from "../components/ThemeToggleButton"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -25,21 +26,21 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <LayoutContainer>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <LayoutBody>
-        <main>
-          {children}
-        </main>
-        <footer style={{
-          marginTop: `2rem`
-        }}>
-          © {new Date().getFullYear()}, {data.site.siteMetadata?.title || `Title`}
-          &nbsp;
-          <a href="https://github.com/nicework-company/unhandledexception.club">Website Source on GitHub</a>
-        </footer>
-      </LayoutBody>
-    </LayoutContainer>
+    <>
+      <ThemeToggleButton />
+      <LayoutContainer>
+        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+        <LayoutBody>
+          <main>
+            {children}
+          </main>
+          <Footer>
+            {`© ${new Date().getFullYear()}, ${data.site.siteMetadata?.title || `Title`} `}
+            <FooterLink href="https://github.com/nicework-company/unhandledexception.club">Website Source on GitHub</FooterLink>
+          </Footer>
+        </LayoutBody>
+      </LayoutContainer>
+    </>
   )
 }
 
