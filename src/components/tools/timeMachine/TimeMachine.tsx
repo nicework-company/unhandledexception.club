@@ -1,18 +1,17 @@
 import * as React from "react"
 import { useState } from "react"
+import timezones from "timezones.json"
+import * as cityTimezones from "city-timezones"
 
 enum Tokens {
   TIMES = "{{TIMES}}",
   STREAM_LINK = "{{STREAM_LINK}}",
 }
 
-const timeListTemplate = `
-{{helsinki/finland}}
-{{amsterdam/netherlands}}
-`
+const timeListTemplate = ["Europe/Helsinki", "Europe/Amsterdam"]
 
 const generateTimes = template => {
-  return template
+  return template.reduce((acc, timezone) => `${acc} ${timezone}`, "")
 }
 
 const generateOutput = postTemplate => {
@@ -34,6 +33,15 @@ const TimeMachine = () => {
         value={postTemplate}
         onChange={handleTemplateChange}
       />
+      <div>
+        {timeListTemplate.map(timezone => (
+          <>
+            <label>{`${timezone}: `}</label>
+            <input key={timezone} value={`20:00`} />
+            <br />
+          </>
+        ))}
+      </div>
       <textarea
         readOnly
         id="output"
