@@ -39,7 +39,7 @@ const Social = () => {
           {'@eralpkaraduman'}
         </TiledLink>
 
-        <TiledLink href="http://twitter.com/can_sykrfkl">
+        <TiledLink href="http://twitter.com/csoykarafakili">
           <TiledLinkIcon src={twitterIcon} alt="Can Soykarafakili Twitter" />
           {'@csoykarafakili'}
         </TiledLink>
