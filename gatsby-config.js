@@ -11,6 +11,10 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-dark-mode`,
     {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {},
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
