@@ -29,17 +29,22 @@ const Twitch = () => {
 
         <TiledLink href="https://www.twitch.tv/theBeastOfTheMiddleEast">
           <TiledLinkIcon src={twitchIcon} alt="TheBeastOfTheMiddleEast On Twitch" />
-            TheBeastOfTheMiddleEast On Twitch
+          TheBeastOfTheMiddleEast On Twitch
         </TiledLink>
 
         <TiledLink href="https://www.twitch.tv/LeeroyCankins">
           <TiledLinkIcon src={twitchIcon} alt="LeeroyCankins On Twitch" />
-            LeeroyCankins On Twitch
+          LeeroyCankins On Twitch
         </TiledLink>
 
         <TiledLink href="https://www.twitch.tv/eren_ozel">
           <TiledLinkIcon src={twitchIcon} alt="Eren_Ozel On Twitch" />
-            Eren_Ozel On Twitch
+          Eren_Ozel On Twitch
+        </TiledLink>
+
+        <TiledLink href="https://www.twitch.tv/goedev">
+          <TiledLinkIcon src={twitchIcon} alt="GoeDev On Twitch" />
+          GoeDev On Twitch
         </TiledLink>
       </TiledLinkContainer>
     </>
