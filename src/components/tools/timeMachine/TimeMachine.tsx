@@ -46,12 +46,13 @@ const generateTimes = (timezones, time) => {
     .map(time => {
       const { zones, countries } = timesWithTimezones[time]
       const showZone = moment.tz.zonesForCountry(countries[0]).length > 1
-      return `${countries
-        .map(c => countryFlagEmoji.get(c).unicode)
-        .join(" ")} ${showZone ? zones : ""} ${time}`
+      const flags = countries.map(c => `:flag_${c.toLowerCase()}:`).join(" ")
+      return `${flags} ${showZone ? zones : ""} ${time}`
     })
     .join("\r")
 }
+
+const countryCodeToFlagEmoji = code => {}
 
 const generateOutput = (postTemplate, timezones, time) => {
   return postTemplate.split(Tokens.TIMES).join(generateTimes(timezones, time))
