@@ -186,7 +186,7 @@ const TimeMachine = () => {
       `Set time for ${timezone}`,
       getTimeStringInTimezone(gmtTimeString, TZ0, timezone)
     )
-    const input = moment(value, HOUR_FORMAT).tz(timezone)
+    const input = moment.tz(value!, HOUR_FORMAT, timezone)
     if (input.isValid()) {
       setGmtTimeString(input.tz(TZ0).format(HOUR_FORMAT))
     }
