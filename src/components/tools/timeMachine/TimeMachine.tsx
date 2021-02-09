@@ -25,17 +25,19 @@ interface GeneratedTimesData {
   }
 }
 
+const TZ0 = "Europe/London"
+const HOUR_FORMAT = "HH:mm"
+
 const unique = (value: string, index: number, self: string[]) =>
   self.indexOf(value) === index
 
-const generateTimes = (timezones: string[], time: string) => {
-  const baseTime = moment(time, "HH:mm").tz("GMT")
+const generateTimes = (timezones: string[], gmtTimeString: string) => {
   const accMapping: {
     hour: string
     zone: string
     country: string
   }[] = timezones.map(timezone => ({
-    hour: baseTime.clone().tz(timezone).format("HH:mm"),
+    hour: getTimeStringInTimezone(gmtTimeString, TZ0, timezone),
     zone: moment.tz(timezone).zoneAbbr(),
     country: CT.getCountryForTimezone(timezone)?.id || "?",
   }))
@@ -65,16 +67,18 @@ const generateTimes = (timezones: string[], time: string) => {
 const generateOutput = (
   postTemplate: string,
   timezones: string[],
-  time: string
+  gmtTimeString: string
 ) => {
-  return postTemplate.split(Tokens.TIMES).join(generateTimes(timezones, time))
+  return postTemplate
+    .split(Tokens.TIMES)
+    .join(generateTimes(timezones, gmtTimeString))
 }
 
 const initialTimezones: string[] = [
-  "Europe/Helsinki",
+  "Europe/Istanbul",
   "Europe/Amsterdam",
   "Europe/Berlin",
-  "Europe/Istanbul",
+  "Europe/Helsinki",
   "America/Los_Angeles",
   "America/New_York",
 ]
@@ -100,18 +104,24 @@ const timezonesReducer = (
   }
 }
 
-const getTimeStringInTimezone = (time: string, timezone: string): string => {
-  return moment(time, "HH:mm").tz(timezone).format("HH:mm")
-}
+const getTimeStringInTimezone = (
+  timeString: string,
+  fromTimezone: string,
+  toTimezone: string
+): string =>
+  moment
+    .tz(timeString, HOUR_FORMAT, fromTimezone)
+    .tz(toTimezone)
+    .format(HOUR_FORMAT)
+
+const nowGmtTimeString = moment().tz(TZ0).format(HOUR_FORMAT)
 
 const TimeMachine = () => {
   const [postTemplate, setPostTemplate] = useState<string>(
     `Bu aksam pregrenming yayini olacaktir.\r${Tokens.TIMES}\r${Tokens.STREAM_LINK}`
   )
-
-  const [baseTimeString, setBaseTimeString] = useState<string>(
-    moment().format("HH:mm")
-  )
+  const systemTimezone = moment.tz.guess(true)
+  const [gmtTimeString, setGmtTimeString] = useState<string>(nowGmtTimeString)
   const handleTemplateChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setPostTemplate(e.target.value)
   const [timezones, timezonesDispatch] = useReducer(
@@ -130,11 +140,11 @@ const TimeMachine = () => {
   const handleOnTimezoneHourChange = (timezone: string) => {
     const value = prompt(
       `Set time for ${timezone}`,
-      getTimeStringInTimezone(baseTimeString, timezone)
+      getTimeStringInTimezone(gmtTimeString, TZ0, timezone)
     )
-    const input = moment(value, "HH:mm").tz(timezone)
+    const input = moment(value, HOUR_FORMAT).tz(timezone)
     if (input.isValid()) {
-      setBaseTimeString(input.clone().tz("GMT").format("HH:mm"))
+      setGmtTimeString(input.tz(TZ0).format(HOUR_FORMAT))
     }
   }
   return (
@@ -148,16 +158,21 @@ const TimeMachine = () => {
         onChange={handleTemplateChange}
       />
       <div>
+        <div>{`System timezone: ${systemTimezone}`}</div>
+        <div>{`GMT: ${gmtTimeString}`}</div>
         {timezones.map(timezone => (
           <>
-            <label>{`${timezone}: `}</label>
+            <label key={timezone}>{`${timezone}: `}</label>
             <button
               key={timezone}
               onClick={() => handleOnTimezoneHourChange(timezone)}
             >
-              {getTimeStringInTimezone(baseTimeString, timezone)}
+              {getTimeStringInTimezone(gmtTimeString, TZ0, timezone)}
             </button>
-            <button onClick={() => handleOnRemoveTimezone(timezone)}>
+            <button
+              key={timezone}
+              onClick={() => handleOnRemoveTimezone(timezone)}
+            >
               Remove
             </button>
             <br />
@@ -171,7 +186,7 @@ const TimeMachine = () => {
         name="story"
         rows={5}
         cols={33}
-        value={generateOutput(postTemplate, timezones, baseTimeString)}
+        value={generateOutput(postTemplate, timezones, gmtTimeString)}
       />
     </div>
   )
