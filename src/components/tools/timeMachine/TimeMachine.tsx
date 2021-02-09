@@ -25,7 +25,7 @@ interface GeneratedTimesData {
   }
 }
 
-const TZ0 = "Europe/London"
+const TZ0 = "GMT"
 const HOUR_FORMAT = "HH:mm"
 
 const unique = (value: string, index: number, self: string[]) =>
@@ -67,11 +67,14 @@ const generateTimes = (timezones: string[], gmtTimeString: string) => {
 const generateOutput = (
   postTemplate: string,
   timezones: string[],
-  gmtTimeString: string
+  gmtTimeString: string,
+  streamLinkUrl: string
 ) => {
   return postTemplate
     .split(Tokens.TIMES)
     .join(generateTimes(timezones, gmtTimeString))
+    .split(Tokens.STREAM_LINK)
+    .join(streamLinkUrl)
 }
 
 const initialTimezones: string[] = [
@@ -116,6 +119,47 @@ const getTimeStringInTimezone = (
 
 const nowGmtTimeString = moment().tz(TZ0).format(HOUR_FORMAT)
 
+interface StreamLinkOption {
+  label: string
+  linkUrl: string
+}
+
+const streamLinkOptions: StreamLinkOption[] = [
+  { label: "Eralp Twitch", linkUrl: "https://twitch.tv/ErikThePlum" },
+  {
+    label: "Mert twitch",
+    linkUrl: "https://twitch.tv/TheBeastOfTheMiddleEast",
+  },
+  {
+    label: "Eralp Youtube",
+    linkUrl: "https://www.youtube.com/channel/UCuXhrIE_d-Soapk2WEuGXAg/live",
+  },
+  {
+    label: "Can Twitch",
+    linkUrl: "https://www.twitch.tv/LeeroyCankins",
+  },
+  {
+    label: "Gokmen Twitch",
+    linkUrl: "https://www.twitch.tv/goedev",
+  },
+  {
+    label: "UnhandledException.Club",
+    linkUrl: "https://unhandledexception.club",
+  },
+  {
+    label: "Discord",
+    linkUrl: "http://discord.gg/4GgCG5C",
+  },
+  {
+    label: "Kulak Podcast",
+    linkUrl: "https://kulak.show/",
+  },
+  {
+    label: "Abes Podcast",
+    linkUrl: "https://www.abespodcast.com/",
+  },
+]
+
 const TimeMachine = () => {
   const [postTemplate, setPostTemplate] = useState<string>(
     `Bu aksam pregrenming yayini olacaktir.\r${Tokens.TIMES}\r${Tokens.STREAM_LINK}`
@@ -133,7 +177,7 @@ const TimeMachine = () => {
 
   const handleOnAddTimezone = () => {
     timezonesDispatch({
-      timezone: prompt("Add Timezone", "Europe/Helsinki"),
+      timezone: prompt("Add Timezone", systemTimezone),
       type: TimezonesActionType.Add,
     })
   }
@@ -147,6 +191,14 @@ const TimeMachine = () => {
       setGmtTimeString(input.tz(TZ0).format(HOUR_FORMAT))
     }
   }
+
+  const [streamLinkUrl, setStreamLinkUrl] = useState<string>(
+    streamLinkOptions[0].linkUrl
+  )
+
+  const handleOnStreamLinkChange = (e: ChangeEvent<HTMLSelectElement>) =>
+    setStreamLinkUrl(e.target.value)
+
   return (
     <div>
       <textarea
@@ -157,6 +209,21 @@ const TimeMachine = () => {
         value={postTemplate}
         onChange={handleTemplateChange}
       />
+      <div>
+        <div>Stream Link</div>
+        <select
+          name="stream-link"
+          id="stream-link"
+          value={streamLinkUrl}
+          onChange={handleOnStreamLinkChange}
+        >
+          {streamLinkOptions.map(({ label, linkUrl }) => (
+            <option key={label} value={linkUrl}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </div>
       <div>
         <div>{`System timezone: ${systemTimezone}`}</div>
         <div>{`GMT: ${gmtTimeString}`}</div>
@@ -184,9 +251,14 @@ const TimeMachine = () => {
         readOnly
         id="output"
         name="story"
-        rows={5}
+        rows={10}
         cols={33}
-        value={generateOutput(postTemplate, timezones, gmtTimeString)}
+        value={generateOutput(
+          postTemplate,
+          timezones,
+          gmtTimeString,
+          streamLinkUrl
+        )}
       />
     </div>
   )
