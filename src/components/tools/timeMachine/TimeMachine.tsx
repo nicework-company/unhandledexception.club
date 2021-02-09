@@ -55,7 +55,9 @@ const generateTimes = (timezones: string[], gmtTimeString: string) => {
   return Object.keys(timesWithTimezones)
     .map(time => {
       const { zones, countries } = timesWithTimezones[time]
-      const showZone = moment.tz.zonesForCountry(countries[0])?.length || 0 > 1
+      const numCountryZones =
+        moment.tz.zonesForCountry(countries[0])?.length || 0
+      const showZone = numCountryZones > 1
       const flags = countries
         .map((c: string) => `:flag_${c.toLowerCase()}:`)
         .join(" ")
