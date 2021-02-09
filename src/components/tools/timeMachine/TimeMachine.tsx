@@ -55,7 +55,7 @@ const generateTimes = (timezones: string[], gmtTimeString: string) => {
   return Object.keys(timesWithTimezones)
     .map(time => {
       const { zones, countries } = timesWithTimezones[time]
-      const showZone = moment.tz.zonesForCountry(countries[0]).length > 1
+      const showZone = moment.tz.zonesForCountry(countries[0])?.length || 0 > 1
       const flags = countries
         .map((c: string) => `:flag_${c.toLowerCase()}:`)
         .join(" ")
@@ -101,7 +101,9 @@ const timezonesReducer = (
         return [...timezones]
       }
     case TimezonesActionType.Remove:
-      return [...timezones].filter(t => t !== action.timezone)
+      return [...timezones].filter(
+        (timezone: string) => timezone !== action.timezone
+      )
     default:
       return timezones
   }
@@ -186,7 +188,7 @@ const TimeMachine = () => {
       `Set time for ${timezone}`,
       getTimeStringInTimezone(gmtTimeString, TZ0, timezone)
     )
-    const input = moment(value, HOUR_FORMAT).tz(timezone)
+    const input = moment.tz(value!, HOUR_FORMAT, timezone)
     if (input.isValid()) {
       setGmtTimeString(input.tz(TZ0).format(HOUR_FORMAT))
     }
@@ -228,22 +230,15 @@ const TimeMachine = () => {
         <div>{`System timezone: ${systemTimezone}`}</div>
         <div>{`GMT: ${gmtTimeString}`}</div>
         {timezones.map(timezone => (
-          <>
+          <div key={timezone}>
             <label key={timezone}>{`${timezone}: `}</label>
-            <button
-              key={timezone}
-              onClick={() => handleOnTimezoneHourChange(timezone)}
-            >
+            <button onClick={() => handleOnTimezoneHourChange(timezone)}>
               {getTimeStringInTimezone(gmtTimeString, TZ0, timezone)}
             </button>
-            <button
-              key={timezone}
-              onClick={() => handleOnRemoveTimezone(timezone)}
-            >
+            <button onClick={() => handleOnRemoveTimezone(timezone)}>
               Remove
             </button>
-            <br />
-          </>
+          </div>
         ))}
         <button onClick={handleOnAddTimezone}>Add</button>
       </div>
