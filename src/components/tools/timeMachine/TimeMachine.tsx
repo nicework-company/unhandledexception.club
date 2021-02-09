@@ -1,10 +1,7 @@
 import * as React from "react"
-import { useReducer, useState } from "react"
-import timezones from "timezones.json"
-import * as cityTimezones from "city-timezones"
+import { ChangeEvent, useReducer, useState } from "react"
 import * as CT from "countries-and-timezones"
-import * as moment from "moment-timezone"
-import * as countryFlagEmoji from "country-flag-emoji"
+import moment from "moment-timezone"
 
 enum Tokens {
   TIMES = "{{TIMES}}",
@@ -18,43 +15,58 @@ enum TimezonesActionType {
 
 interface TimezonesAction {
   type: TimezonesActionType
-  timezone: string
+  timezone?: string | null
 }
 
-const unique = (value, index, self) => self.indexOf(value) === index
+interface GeneratedTimesData {
+  [hour: string]: {
+    zones: string[]
+    countries: string[]
+  }
+}
 
-const generateTimes = (timezones, time) => {
+const unique = (value: string, index: number, self: string[]) =>
+  self.indexOf(value) === index
+
+const generateTimes = (timezones: string[], time: string) => {
   const baseTime = moment(time, "HH:mm").tz("GMT")
-  const timesWithTimezones = timezones
-    .map(timezone => [
-      baseTime.clone().tz(timezone).format("HH:mm"),
-      moment.tz(timezone).zoneAbbr(),
-      CT.getCountryForTimezone(timezone).id,
-    ])
-    .reduce(
-      (acc, [hour, zone, country]) => ({
-        ...acc,
-        [hour]: {
-          zones: [...(acc[hour]?.zones || []), zone].filter(unique),
-          countries: [...(acc[hour]?.countries || []), country].filter(unique),
-        },
-      }),
-      {}
-    )
+  const accMapping: {
+    hour: string
+    zone: string
+    country: string
+  }[] = timezones.map(timezone => ({
+    hour: baseTime.clone().tz(timezone).format("HH:mm"),
+    zone: moment.tz(timezone).zoneAbbr(),
+    country: CT.getCountryForTimezone(timezone)?.id || "?",
+  }))
+  const timesWithTimezones = accMapping.reduce(
+    (acc: GeneratedTimesData, { hour, zone, country }) => ({
+      ...acc,
+      [hour]: {
+        zones: [...(acc[hour]?.zones || []), zone].filter(unique),
+        countries: [...(acc[hour]?.countries || []), country].filter(unique),
+      },
+    }),
+    {}
+  )
 
   return Object.keys(timesWithTimezones)
     .map(time => {
       const { zones, countries } = timesWithTimezones[time]
       const showZone = moment.tz.zonesForCountry(countries[0]).length > 1
-      const flags = countries.map(c => `:flag_${c.toLowerCase()}:`).join(" ")
+      const flags = countries
+        .map((c: string) => `:flag_${c.toLowerCase()}:`)
+        .join(" ")
       return `${flags} ${showZone ? zones : ""} ${time}`
     })
     .join("\r")
 }
 
-const countryCodeToFlagEmoji = code => {}
-
-const generateOutput = (postTemplate, timezones, time) => {
+const generateOutput = (
+  postTemplate: string,
+  timezones: string[],
+  time: string
+) => {
   return postTemplate.split(Tokens.TIMES).join(generateTimes(timezones, time))
 }
 
@@ -96,24 +108,26 @@ const TimeMachine = () => {
   const [postTemplate, setPostTemplate] = useState<string>(
     `Bu aksam pregrenming yayini olacaktir.\r${Tokens.TIMES}\r${Tokens.STREAM_LINK}`
   )
-  const now = new Date()
+
   const [baseTimeString, setBaseTimeString] = useState<string>(
     moment().format("HH:mm")
   )
-  const handleTemplateChange = e => setPostTemplate(e.target.value)
+  const handleTemplateChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
+    setPostTemplate(e.target.value)
   const [timezones, timezonesDispatch] = useReducer(
     timezonesReducer,
     initialTimezones
   )
-  const handleOnRemoveTimezone = timezone =>
+  const handleOnRemoveTimezone = (timezone: string) =>
     timezonesDispatch({ timezone, type: TimezonesActionType.Remove })
-  const handleOnAddTimezone = timezone => {
+
+  const handleOnAddTimezone = () => {
     timezonesDispatch({
       timezone: prompt("Add Timezone", "Europe/Helsinki"),
       type: TimezonesActionType.Add,
     })
   }
-  const handleOnTimezoneHourChange = timezone => {
+  const handleOnTimezoneHourChange = (timezone: string) => {
     const value = prompt(
       `Set time for ${timezone}`,
       getTimeStringInTimezone(baseTimeString, timezone)
@@ -139,7 +153,7 @@ const TimeMachine = () => {
             <label>{`${timezone}: `}</label>
             <button
               key={timezone}
-              onClick={e => handleOnTimezoneHourChange(timezone)}
+              onClick={() => handleOnTimezoneHourChange(timezone)}
             >
               {getTimeStringInTimezone(baseTimeString, timezone)}
             </button>
