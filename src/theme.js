@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from "styled-components"
 
 const mediumSize = "770px"
 const smallSize = "450px"
@@ -8,6 +8,7 @@ const smallSize = "450px"
 const lightScheme = `
   body {
     --bg: #ffffff;
+    --text-color: #222222;
     --header-link-title-color: #ac3232;
     --header-link-title-hover-color: #222222;
     --header-link-border-color: #ac3232;
@@ -25,12 +26,14 @@ const lightScheme = `
     --footer-color: #222222;
     --footer-link-color: #5656ff;
     background-color: var(--bg);
+    color: var(--text-color);
   }
 `
 
 const darkScheme = `
   body.dark {
     --bg: #181a1b;
+    --text-color: #c7c7c7;
     --header-link-title-color: #d15f5f;
     --header-link-title-hover-color: #c7c7c7;
     --header-link-border-color: #d15f5f;
@@ -48,14 +51,15 @@ const darkScheme = `
     --footer-color: #c7c7c7;
     --footer-link-color: #5656ff;
     background-color: var(--bg);
+    color: var(--text-color);
   }
 `
 export const GlobalStyle = createGlobalStyle`
-  ${props => props.theme === 'light' ? lightScheme : darkScheme}
+  ${props => (props.theme === "light" ? lightScheme : darkScheme)}
 `
 
 export const LayoutContainer = styled.div`
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   padding: 50px 20px;
   max-width: 950px;
   margin: auto;
@@ -105,7 +109,7 @@ export const HeaderLinkTitle = styled.div`
   }
 `
 
-export const HeaderLink = styled(props => <Link {...props}/>)`
+export const HeaderLink = styled(props => <Link {...props} />)`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -164,7 +168,7 @@ export const SectionTitle = styled.h3`
   color: var(--section-title-color);
   margin: 0.4em 0 0 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 `
 
 export const PodcastContainer = styled.div`
@@ -236,7 +240,7 @@ export const TogglerSlider = styled.div`
   border-radius: 100%;
   background-color: var(--toggler-slider-bg-color);
   position: relative;
-  transition: all ease-in-out .35s;
+  transition: all ease-in-out 0.35s;
   top: 0px;
 
   &.light {
