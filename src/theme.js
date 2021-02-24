@@ -125,24 +125,21 @@ export const HeaderLink = styled(props => <Link {...props} />)`
 
 export const TiledLink = styled.a`
   display: flex;
+  flex-grow: 1;
+  min-width: 30%;
   background-color: var(--tiled-link-bg-color);
-  width: 49%;
   align-items: center;
   color: var(--tiled-link-color);
   padding: 10px;
-  margin-bottom: 10px;
+  box-sizing: border-box;
+  margin: 5px;
   border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
   border: 1px solid var(--tiled-link-border-color);
-
+  justify-content: space-between;
   &:hover {
     background-color: var(--tiled-link-border-color);
-  }
-
-  @media (max-width: ${mediumSize}) {
-    width: 100%;
-    font-size: 12px;
   }
 `
 
@@ -150,18 +147,16 @@ export const TiledLinkIcon = styled.img`
   max-width: 24px;
   max-height: 24px;
   margin-bottom: 0;
-  margin-right: 10px;
+  margin-left: 10px;
 `
 
 export const TiledLinkContainer = styled.div`
   margin-top: 15px;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-
-  @media (max-width: ${mediumSize}) {
-    flex-direction: column;
-  }
+  box-sizing: border-box;
+  margin-left: -5px;
+  margin-right: -5px;
 `
 
 export const SectionTitle = styled.h3`
@@ -241,7 +236,7 @@ export const TogglerSlider = styled.div`
   background-color: var(--toggler-slider-bg-color);
   position: relative;
   transition: all ease-in-out 0.35s;
-  top: 0px;
+  top: 0;
 
   &.light {
     left: 3px;
