@@ -52,14 +52,6 @@ const Streams = () => {
           <TiledLinkIcon src={twitchIcon} alt="LeeroyCankins On Twitch" />
         </TiledLink>
 
-        <TiledLink href="https://www.youtube.com/channel/UCuXhrIE_d-Soapk2WEuGXAg/live">
-          Unhandled Exception Club on YouTube
-          <TiledLinkIcon
-            src={youtubeIcon}
-            alt="Unhandled Exception Club Youtube Live"
-          />
-        </TiledLink>
-
         <TiledLink href="https://www.twitch.tv/eren_ozel">
           Eren_Ozel On Twitch
           <TiledLinkIcon src={twitchIcon} alt="Eren_Ozel On Twitch" />
@@ -69,6 +61,12 @@ const Streams = () => {
           GoeDev On Twitch
           <TiledLinkIcon src={twitchIcon} alt="GoeDev On Twitch" />
         </TiledLink>
+	
+	<TiledLink href="https://www.twitch.tv/elwnyx">
+          Elwnyx On Twitch
+          <TiledLinkIcon src={twitchIcon} alt="Elwnyx On Twitch" />
+        </TiledLink>
+
       </TiledLinkContainer>
     </>
   )
