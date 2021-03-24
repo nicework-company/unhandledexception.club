@@ -57,12 +57,7 @@ const Streams = () => {
           <TiledLinkIcon src={twitchIcon} alt="Eren_Ozel On Twitch" />
         </TiledLink>
 
-        <TiledLink href="https://www.twitch.tv/goedev">
-          GoeDev On Twitch
-          <TiledLinkIcon src={twitchIcon} alt="GoeDev On Twitch" />
-        </TiledLink>
-	
-	<TiledLink href="https://www.twitch.tv/elwnyx">
+        <TiledLink href="https://www.twitch.tv/elwnyx">
           Elwnyx On Twitch
           <TiledLinkIcon src={twitchIcon} alt="Elwnyx On Twitch" />
         </TiledLink>

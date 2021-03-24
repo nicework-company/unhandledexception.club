@@ -63,10 +63,6 @@ const Social = () => {
           <TiledLinkIcon src={twitterIcon} alt="Eren Ozel Twitter" />
         </TiledLink>
 
-        <TiledLink href="http://twitter.com/gokmengorgen">
-          {"@gokmengorgen"}
-          <TiledLinkIcon src={twitterIcon} alt="Gökmen Görgen Twitter" />
-        </TiledLink>
       </TiledLinkContainer>
     </>
   )

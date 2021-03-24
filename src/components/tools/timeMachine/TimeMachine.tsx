@@ -143,10 +143,6 @@ const streamLinkOptions: StreamLinkOption[] = [
     linkUrl: "https://www.twitch.tv/LeeroyCankins",
   },
   {
-    label: "Gokmen Twitch",
-    linkUrl: "https://www.twitch.tv/goedev",
-  },
-  {
     label: "UnhandledException.Club",
     linkUrl: "https://unhandledexception.club",
   },
