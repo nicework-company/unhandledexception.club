@@ -86,6 +86,7 @@ const initialTimezones: string[] = [
   "Europe/Helsinki",
   "America/Los_Angeles",
   "America/New_York",
+  "Europe/Sofia"
 ]
 
 const timezonesReducer = (
