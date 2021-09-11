@@ -86,7 +86,7 @@ const initialTimezones: string[] = [
   "Europe/Helsinki",
   "America/Los_Angeles",
   "America/New_York",
-  "Europe/Sofia"
+  "Europe/Sofia",
 ]
 
 const timezonesReducer = (
@@ -142,6 +142,10 @@ const streamLinkOptions: StreamLinkOption[] = [
   {
     label: "Can Twitch",
     linkUrl: "https://www.twitch.tv/LeeroyCankins",
+  },
+  {
+    label: "Umut Twitch",
+    linkUrl: "https://www.twitch.tv/usirin",
   },
   {
     label: "UnhandledException.Club",

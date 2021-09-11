@@ -62,6 +62,10 @@ const Streams = () => {
           <TiledLinkIcon src={twitchIcon} alt="Elwnyx On Twitch" />
         </TiledLink>
 
+        <TiledLink href="https://www.twitch.tv/usirin">
+          usirin On Twitch
+          <TiledLinkIcon src={twitchIcon} alt="usirin On Twitch" />
+        </TiledLink>
       </TiledLinkContainer>
     </>
   )
