@@ -2,6 +2,8 @@ import * as React from "react"
 import { ChangeEvent, useReducer, useState } from "react"
 import * as CT from "countries-and-timezones"
 import moment from "moment-timezone"
+import { countryCodeEmoji } from 'country-code-emoji'
+import * as RadioGroup from '@radix-ui/react-radio-group';
 
 enum Tokens {
   TIMES = "{{TIMES}}",
@@ -25,13 +27,19 @@ interface GeneratedTimesData {
   }
 }
 
+type FlagMode = 'discord' | 'emoji'
+
 const TZ0 = "GMT"
 const HOUR_FORMAT = "HH:mm"
 
 const unique = (value: string, index: number, self: string[]) =>
   self.indexOf(value) === index
 
-const generateTimes = (timezones: string[], gmtTimeString: string) => {
+const getFlagEmojiForCountry = (country:string) => {
+  return countryCodeEmoji(country);
+}
+
+const generateTimes = (timezones: string[], gmtTimeString: string, flagMode: FlagMode) => {
   const accMapping: {
     hour: string
     zone: string
@@ -59,7 +67,7 @@ const generateTimes = (timezones: string[], gmtTimeString: string) => {
         moment.tz.zonesForCountry(countries[0])?.length || 0
       const showZone = numCountryZones > 1
       const flags = countries
-        .map((c: string) => `:flag_${c.toLowerCase()}:`)
+        .map((c: string) => flagMode === 'discord' ? `:flag_${c.toLowerCase()}:`: getFlagEmojiForCountry(c))
         .join(" ")
       return `${flags} ${showZone ? zones : ""} ${time}`
     })
@@ -70,23 +78,20 @@ const generateOutput = (
   postTemplate: string,
   timezones: string[],
   gmtTimeString: string,
-  streamLinkUrl: string
+  streamLinkUrl: string,
+  flagMode: FlagMode,
 ) => {
   return postTemplate
     .split(Tokens.TIMES)
-    .join(generateTimes(timezones, gmtTimeString))
+    .join(generateTimes(timezones, gmtTimeString, flagMode))
     .split(Tokens.STREAM_LINK)
     .join(streamLinkUrl)
 }
 
 const initialTimezones: string[] = [
-  "Europe/Istanbul",
-  "Europe/Amsterdam",
-  "Europe/Berlin",
   "Europe/Helsinki",
-  "America/Los_Angeles",
-  "America/New_York",
-  "Europe/Sofia",
+  "Europe/Istanbul",
+  "Canada/Eastern"
 ]
 
 const timezonesReducer = (
@@ -166,6 +171,7 @@ const streamLinkOptions: StreamLinkOption[] = [
 ]
 
 const TimeMachine = () => {
+  const [flagMode, setFlagMode] = useState<FlagMode>('emoji');
   const [postTemplate, setPostTemplate] = useState<string>(
     `Bu aksam pregrenming yayini olacaktir.\r${Tokens.TIMES}\r${Tokens.STREAM_LINK}`
   )
@@ -229,6 +235,14 @@ const TimeMachine = () => {
           ))}
         </select>
       </div>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <label>Flag mode</label>
+          <RadioGroup.Root defaultValue="emoji" value={flagMode} onValueChange={(v) => setFlagMode(v as FlagMode)}>
+            <RadioGroup.Item value='discord' id="r_flag_discord" >Discord</RadioGroup.Item>
+            <RadioGroup.Item value='emoji' id="r_flag_emoji" >Emoji</RadioGroup.Item>
+          </RadioGroup.Root>
+        </div>
+        
       <div>
         <div>{`System timezone: ${systemTimezone}`}</div>
         <div>{`GMT: ${gmtTimeString}`}</div>
@@ -255,7 +269,8 @@ const TimeMachine = () => {
           postTemplate,
           timezones,
           gmtTimeString,
-          streamLinkUrl
+          streamLinkUrl,
+          flagMode,
         )}
       />
     </div>
