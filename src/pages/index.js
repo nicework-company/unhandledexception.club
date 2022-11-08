@@ -5,6 +5,7 @@ import TopLinks from "../components/TopLinks"
 import Streams from "../components/Streams"
 import Podcast from "../components/Podcast"
 import Social from "../components/Social"
+import Tools from "../components/Tools"
 
 const IndexPage = () => {
   return (
@@ -14,6 +15,7 @@ const IndexPage = () => {
       <Streams />
       <Podcast />
       <Social />
+      <Tools />
     </Layout>
   )
 }
