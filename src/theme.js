@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from "styled-components"
 
 const mediumSize = "770px"
 const smallSize = "450px"
+const xSmallSize = "320px"
 
 const lightScheme = `
   body {
@@ -84,6 +85,11 @@ export const HeaderLinkImage = styled.img`
 
   @media (max-width: ${smallSize}) {
     height: 80px;
+    width: 50vw;
+  }
+
+  @media (max-width: ${xSmallSize}) {
+    width: 40vw;
   }
 `
 
